@@ -1,0 +1,23 @@
+mixin registerForm(saveUrl, userType)
+
+    div.form-container
+        form(action=saveUrl method='post')
+            div.form-input
+                label(for='email') Email
+                input(id='email' name='email')
+
+            div.form-input
+                label(for='password') Instructor
+                input(id='password' name='password' type='password')
+
+            //div.form-input
+            //    label(for='password') Instructor
+            //    input(id='password' name='password' type='password')
+            //
+            //div.form-input
+            //    label(for='description') Course Description
+            //    textarea(id='description' name='description' rows=10 cols=80) #{course.description}
+            //
+            //div.form-buttons
+            //    a.button(href=cancelUrl) Cancel
+            //    button.button.primary(type='submit') Save
