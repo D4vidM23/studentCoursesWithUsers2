@@ -1,23 +1,25 @@
 mixin registerForm(saveUrl, userType)
 
+
     div.form-container
         form(action=saveUrl method='post')
             div.form-input
                 label(for='email') Email
-                input(id='email' name='email')
-
+                input(id='email' name='email' )
             div.form-input
-                label(for='password') Instructor
+                label(for='password') Password
                 input(id='password' name='password' type='password')
-
-            //div.form-input
-            //    label(for='password') Instructor
-            //    input(id='password' name='password' type='password')
-            //
-            //div.form-input
-            //    label(for='description') Course Description
-            //    textarea(id='description' name='description' rows=10 cols=80) #{course.description}
-            //
-            //div.form-buttons
-            //    a.button(href=cancelUrl) Cancel
-            //    button.button.primary(type='submit') Save
+            div.form-input
+                label(for='first_name') First Name
+                input(id='first_name' name='first_name')
+            div.form-input
+                label(for='last_name') Last Name
+                input(id='last_name' name='last_name')
+            if userType === 'student'
+                div.form-input
+                    label(for='grade_level') Grade
+                    select(id='grade_level' name='grade_level')
+                        each grade in [9, 10, 11, 12]
+                            option(value=grade) #{grade}
+            div.form-buttons
+                button.button.primary(type='submit') Save
