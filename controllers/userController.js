@@ -49,7 +49,7 @@ module.exports.registerStaff = async function(req, res){
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         user_id: user.id
-    })
+    });
     res.redirect('/courses')
 }
 
