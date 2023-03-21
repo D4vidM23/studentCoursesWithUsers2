@@ -104,17 +104,29 @@ module.exports.deleteStudent = async function (req, res) {
 
 //Add course to student
 module.exports.enrollStudent = async function (req, res) {
+    const isAdmin = req.user.can('enroll student');
+    const profileBelongsToUser = req.user.can('enroll self') && req.user.matchesStudentId(req.params.id);
+    if (!isAdmin && !profileBelongsToUser) {
+        res.redirect('/')
+        return
+    }
 
         await StudentCourses.create({
-            student_id: req.params.studentId,
-            course_id: req.body.course
-        })
-        res.redirect(`/students/profile/${req.params.studentId}`);
+                student_id: req.params.studentId,
+                course_id: req.body.course
+            })
+            res.redirect(`/students/profile/${req.params.studentId}`);
 
 }
 
 //delete course from student
 module.exports.removeCourse = async function(req, res){
+    const isAdmin = req.user.can('drop student');
+    const profileBelongsToUser = req.user.can('drop self') && req.user.matchesStudentId(req.params.studentId);
+    if (!isAdmin && !profileBelongsToUser) {
+        res.redirect('/')
+        return
+    }
     await StudentCourses.destroy({
         where: {
             student_id: req.params.studentId,
@@ -132,4 +144,8 @@ function studentHasCourse(student, course) {
     }
     return false
 }
+
+
+
+
 
